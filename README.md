@@ -1,3 +1,15 @@
+# ⚠️ Modified Fork Notice
+
+This is a **modified version** of the original [Happy Hare](https://github.com/moggieuk/Happy-Hare) project by moggieuk.
+
+**Original project:** https://github.com/moggieuk/Happy-Hare  
+**Modified by:** marek-hurt  
+**License:** GPL-3.0 (same as original)
+
+For the official version, documentation, and support, please visit the original repository.
+
+---
+
 <p align="center">
   <img src="https://github.com/moggieuk/Happy-Hare/wiki/resources/happy_hare_logo.jpg" alt='Happy Hare' width='30%'>
   <h1 align="center">Happy Hare</h1>

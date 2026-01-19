@@ -2,11 +2,112 @@
 
 This is a **modified version** of the original [Happy Hare](https://github.com/moggieuk/Happy-Hare) project by moggieuk.
 
-**Original project:** https://github.com/moggieuk/Happy-Hare  
-**Modified by:** marek-hurt  
+**Original project:** https://github.com/moggieuk/Happy-Hare
+**Modified by:** marek-hurt
 **License:** GPL-3.0 (same as original)
 
 For the official version, documentation, and support, please visit the original repository.
+
+## 🔧 Modifications in This Fork
+
+### StepperIdlerSelector - Stepper Motor Based Idler Control
+
+This fork adds **StepperIdlerSelector**, a new selector type that enables control of the MMU idler using a **stepper motor** instead of a PWM servo. This modification is designed for MMU setups similar to **Prusa MMU2S** and other designs that use stepper motors for both selector and idler movements.
+
+#### Key Features:
+- ✅ **Stepper motor control** for idler instead of servo
+- ✅ **Higher precision and repeatability** compared to servo-based systems
+- ✅ **Sensorless homing support** via TMC stallguard
+- ✅ **Compatible with Prusa MMU2S hardware** and similar designs
+- ✅ **No servo kickback issues**
+- ✅ **Better force control** for filament gripping
+
+#### What's New:
+- New `StepperIdlerSelector` class in `extras/mmu/mmu_selector.py`
+- Integration into `mmu_machine.py` for seamless use
+- New G-code commands:
+  - `MMU_CALIBRATE_SELECTOR` - Calibrate selector positions
+  - `MMU_CALIBRATE_IDLER` - Calibrate idler positions
+  - `MMU_SOAKTEST_SELECTOR` - Test selector and idler movement
+- Example configuration: `config/examples/mmu_stepper_idler_example.cfg`
+- Comprehensive setup guide: See documentation below
+
+#### Quick Start:
+
+1. **Configure selector type:**
+   ```ini
+   [mmu_machine]
+   selector_type: StepperIdlerSelector
+   num_gates: 5
+   ```
+
+2. **Add idler stepper configuration:**
+   ```ini
+   [manual_stepper idler_stepper]
+   step_pin: mmu:MMU_IDLER_STEP
+   dir_pin: mmu:MMU_IDLER_DIR
+   enable_pin: !mmu:MMU_IDLER_ENABLE
+   rotation_distance: 128
+   endstop_pin: ^mmu:MMU_IDLER_ENDSTOP
+   # ... other settings
+   ```
+
+3. **Set position parameters:**
+   ```ini
+   # In mmu_parameters.cfg or your config
+   cad_idler_gate0_pos: 5.0
+   cad_idler_gate_width: 21.0
+   ```
+
+4. **Calibrate:**
+   ```gcode
+   MMU_CALIBRATE_SELECTOR
+   MMU_CALIBRATE_IDLER
+   ```
+
+#### Documentation:
+- 📖 **Full setup guide:** [STEPPER_IDLER_SETUP.md](STEPPER_IDLER_SETUP.md)
+- 📝 **Example config:** [config/examples/mmu_stepper_idler_example.cfg](config/examples/mmu_stepper_idler_example.cfg)
+- 🔄 **Migration from 3D-Druckerplausch-Klipper:** [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) - Step-by-step migration
+- 📋 **Changelog:** [CHANGELOG_FORK.md](CHANGELOG_FORK.md) - What's new in this fork
+
+#### Comparison: StepperIdlerSelector vs LinearSelector (Standard)
+
+| Feature | LinearSelector (Standard) | StepperIdlerSelector (This Fork) |
+|---------|---------------------------|----------------------------------|
+| Idler Control | PWM Servo | Stepper Motor |
+| Precision | Depends on servo quality | High (stepper motor) |
+| Homing | Selector only | Selector + Idler |
+| Configuration | `[mmu_servo selector_servo]` | `[manual_stepper idler_stepper]` |
+| Calibration | Servo angles | Linear positions (mm) |
+| Stallguard Support | No | Yes (optional) |
+| Kickback Issues | Possible with digital servos | No |
+
+#### Use Cases:
+- Prusa MMU2S or clones
+- Custom MMU builds with stepper-based idler
+- Upgrading from servo to stepper idler
+- Migration from 3D-Druckerplausch-Klipper MMU2S configs
+
+#### Installation:
+
+```bash
+cd ~
+git clone https://github.com/marek-hurt/Happy-Hare-modified.git Happy-Hare
+cd Happy-Hare
+./install.sh
+```
+
+Then configure your `mmu.cfg` or `mmu_hardware.cfg` with `selector_type: StepperIdlerSelector`.
+
+#### Compatibility Note:
+This modification maintains full compatibility with the original Happy Hare project. You can:
+- Switch between `LinearSelector` and `StepperIdlerSelector` by changing the config
+- Use all standard Happy Hare features (sensors, LED effects, Spoolman, etc.)
+- Follow the official Happy Hare documentation for general setup
+- Mix this fork with standard Happy Hare installations (different printers)
+
+The only difference is the selector type implementation - everything else works identically to the original.
 
 ---
 

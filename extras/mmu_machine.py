@@ -1046,7 +1046,7 @@ class MmuKinematics:
         if self.mmu_machine.selector_type in ['LinearSelector', 'RotarySelector', 'StepperIdlerSelector']:
             limits = self.limits
             xpos, _ = move.end_pos[:2]
-            if xpos != 0. and (xpos < limits[0][0] or xpos > limits[0][1]):
+            if move.axes_d[0] and (xpos < limits[0][0] or xpos > limits[0][1]):
                 raise move.move_error()
 
         if move.axes_d[0]: # Selector

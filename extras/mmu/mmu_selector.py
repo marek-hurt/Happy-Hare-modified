@@ -2306,16 +2306,10 @@ class StepperIdlerSelector(BaseSelector, object):
 
     def _home_selector(self):
         self.mmu.log_debug("Homing selector...")
-        endstops = self.selector_rail.get_endstops()
-        position_min, position_max = self.selector_rail.get_range()
-        hi = self.mmu_toolhead.get_kinematics().rails[0].get_homing_info()
-        homepos = [None, None]
-        homepos[0] = hi.position_endstop
-        homing_state = Homing(self.mmu.printer, MmuToolHead.TOOLHEAD_HOMING_AXES)
-        homing_state.set_axes([0])
         try:
-            self.mmu_toolhead.get_last_move_time()
-            homing_state.home_rails([self.selector_rail], homepos, [endstops[0]])
+            homing_state = mmu_machine.MmuHoming(self.mmu.printer, self.mmu_toolhead)
+            homing_state.set_axes([0])
+            self.mmu_toolhead.get_kinematics().home(homing_state)
         except Exception as e:
             raise MmuError("Homing selector failed: %s" % str(e))
         self.is_homed = True

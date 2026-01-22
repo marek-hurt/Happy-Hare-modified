@@ -69,11 +69,13 @@ This fork adds **StepperIdlerSelector**, a new selector type that enables contro
 📚 **[Documentation Index](DOCUMENTATION_INDEX.md)** - Complete guide to all documentation
 
 - 📖 **Full setup guide:** [STEPPER_IDLER_SETUP.md](STEPPER_IDLER_SETUP.md)
+- 🔄 **Idler behavior explained:** [IDLER_BEHAVIOR.md](IDLER_BEHAVIOR.md) - How rotary idler with bearings works
 - 💻 **Code reference:** [CODE_REFERENCE.md](CODE_REFERENCE.md) - Code snippets and implementation details
 - 📝 **Example config:** [config/examples/mmu_stepper_idler_example.cfg](config/examples/mmu_stepper_idler_example.cfg)
 - 🔄 **Migration from 3D-Druckerplausch-Klipper:** [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) - Step-by-step migration
 - 📋 **Changelog:** [CHANGELOG_FORK.md](CHANGELOG_FORK.md) - What's new in this fork
 - 📁 **Files modified:** [FILES_MODIFIED.md](FILES_MODIFIED.md) - List of all changes
+- 🧪 **Testing:** [test/TESTING.md](test/TESTING.md) - How to run unit tests
 
 #### Comparison: StepperIdlerSelector vs LinearSelector (Standard)
 

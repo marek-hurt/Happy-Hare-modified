@@ -10,8 +10,10 @@ Complete guide to all documentation files in this fork.
 | [CODE_REFERENCE.md](CODE_REFERENCE.md) | 17KB | Code snippets, implementation details | Developers |
 | [STEPPER_IDLER_SETUP.md](STEPPER_IDLER_SETUP.md) | 7KB | Complete setup guide | Users |
 | [MIGRATION_GUIDE.md](MIGRATION_GUIDE.md) | 8KB | Migration from 3D-Druckerplausch | Migrating users |
+| [IDLER_BEHAVIOR.md](IDLER_BEHAVIOR.md) | 3KB | Rotary idler behavior explained | Everyone |
 | [CHANGELOG_FORK.md](CHANGELOG_FORK.md) | 3KB | What's new in this fork | Everyone |
 | [FILES_MODIFIED.md](FILES_MODIFIED.md) | 5KB | List of modified files | Developers/Maintainers |
+| [test/TESTING.md](test/TESTING.md) | 6KB | Unit testing guide | Developers/Testers |
 
 ## 🚀 Getting Started Path
 
@@ -29,6 +31,7 @@ Complete guide to all documentation files in this fork.
 1. Check **[CODE_REFERENCE.md](CODE_REFERENCE.md)** - See code snippets
 2. Review **[FILES_MODIFIED.md](FILES_MODIFIED.md)** - Understand what changed
 3. Read **[CHANGELOG_FORK.md](CHANGELOG_FORK.md)** - See feature list
+4. Run **[Unit Tests](test/TESTING.md)** - Verify your changes work
 
 ## 📖 Document Details
 
@@ -211,8 +214,10 @@ Complete guide to all documentation files in this fork.
 | CODE_REFERENCE.md | ⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐⭐ |
 | STEPPER_IDLER_SETUP.md | ⭐⭐⭐ | ⭐ | ⭐⭐ | ⭐ |
 | MIGRATION_GUIDE.md | ⭐ | ⭐ | ⭐⭐⭐ | ⭐ |
+| IDLER_BEHAVIOR.md | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
 | CHANGELOG_FORK.md | ⭐⭐ | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ |
 | FILES_MODIFIED.md | ⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐⭐ |
+| test/TESTING.md | ⭐ | ⭐⭐⭐ | ⭐ | ⭐⭐⭐ |
 
 ⭐ = Relevant | ⭐⭐ = Important | ⭐⭐⭐ = Essential
 
@@ -224,8 +229,10 @@ Complete guide to all documentation files in this fork.
 | CODE_REFERENCE.md | Deep | High | 20 min |
 | STEPPER_IDLER_SETUP.md | Detailed | Medium | 15 min |
 | MIGRATION_GUIDE.md | Step-by-step | Medium | 30 min |
+| IDLER_BEHAVIOR.md | Detailed | Medium | 5 min |
 | CHANGELOG_FORK.md | Summary | Low | 2 min |
 | FILES_MODIFIED.md | Reference | High | 5 min |
+| test/TESTING.md | Tutorial | High | 10 min |
 
 ---
 

@@ -2154,6 +2154,7 @@ class StepperIdlerSelector(BaseSelector, object):
         self.cad_idler_gate0_pos = mmu.config.getfloat('cad_idler_gate0_pos', 5.0, minval=0.)
         self.cad_idler_gate_width = mmu.config.getfloat('cad_idler_gate_width', 21.0, above=0.)
         self.cad_idler_tolerance = mmu.config.getfloat('cad_idler_tolerance', 10.0, above=0.)
+        self.cad_idler_home_position = mmu.config.getfloat('cad_idler_home_position', 85.0, minval=0.)  # UP position (no bearing contact)
 
         # Register GCODE commands
         gcode = mmu.printer.lookup_object('gcode')
@@ -2256,9 +2257,16 @@ class StepperIdlerSelector(BaseSelector, object):
             self.grip_state = self.mmu.FILAMENT_DRIVE_STATE
 
     def filament_release(self, measure=False):
-        # Idler stepper doesn't measure, just release
+        # Move idler to UP position (no bearing in contact)
+        self.mmu.log_trace("Releasing idler to UP position at %.1fmm" % self.cad_idler_home_position)
+        self.idler_stepper.do_move(
+            movepos=self.cad_idler_home_position,
+            speed=self.idler_move_speed,
+            accel=self.idler_stepper.accel,
+            sync=True
+        )
         self.grip_state = self.mmu.FILAMENT_RELEASE_STATE
-        return 0.
+        return 0.  # Idler stepper doesn't measure
 
     def get_filament_grip_state(self):
         return self.grip_state
@@ -2315,8 +2323,17 @@ class StepperIdlerSelector(BaseSelector, object):
     def _home_idler(self):
         self.mmu.log_debug("Homing idler...")
         try:
+            # Home to endstop
             self.idler_stepper.do_homing_move(movepos=-200, speed=self.idler_homing_speed,
                                              accel=self.idler_stepper.accel, triggered=True, check_trigger=True)
+            # Set position to a known reference (e.g., 0)
+            self.idler_stepper.do_set_position(2.0)
+            # Move to UP position (no bearing in contact)
+            self.mmu.log_debug("Moving idler to UP position at %.1fmm" % self.cad_idler_home_position)
+            self.idler_stepper.do_move(movepos=self.cad_idler_home_position,
+                                      speed=self.idler_move_speed,
+                                      accel=self.idler_stepper.accel,
+                                      sync=True)
         except Exception as e:
             raise MmuError("Homing idler failed: %s" % str(e))
 

@@ -2181,9 +2181,9 @@ class StepperIdlerSelector(BaseSelector, object):
 
         # Get idler stepper (manual_stepper)
         self.idler_stepper = None
-        if 'manual_stepper idler_stepper' in self.mmu.printer.lookup_objects():
+        try:
             self.idler_stepper = self.mmu.printer.lookup_object('manual_stepper idler_stepper')
-        else:
+        except:
             raise self.mmu.config.error("StepperIdlerSelector requires [manual_stepper idler_stepper] configuration")
 
         # Load selector offsets
